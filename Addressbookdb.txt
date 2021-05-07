@@ -1,0 +1,41 @@
+#UC1
+use addressbookdb;
+desc addressbook;
+#UC2: Created addressbookdb UC3: Inserting values
+insert into addressbook values('new first','new last','first addr','new city','state',112255,99845090,'emails');
+insert into addressbook values('Another','Name','first addr','new city S','state S',876645,1478533956,'emailsE');
+insert into addressbook values('Sam','L','PermanentAddr','Temp City','New State',859947,1123588743,'emailsR');
+insert into addressbook values('John','B','Gopal Math','Sun City','Assam',909947,90235887,'emails@email','family');
+
+select * from addressbook;
+delete from addressbook where firstname='firstname';
+#UC4: Modyfying the table based on the condition 
+update addressbook set firstname='abc',city = 'new city' where firstname = 'first';
+rollback;
+desc addressbook;
+#UC 5: Deleting a contact 
+delete from addressbook where firstname = 'new first';
+select * from addressbook;
+#UC6: Fetching the data specifically which is required
+select * from addressbook where city ='new city' or state='state';
+#UC7
+select ref.column_name from information_schema.columns ref
+	where ref.table_name = 'addressbook'
+	order by ref.column_name;
+select firstname,lastname from addressbook ORDER BY city;
+select count(city) from addressbook where city ='city';
+select firstname from addressbook where city = 'city' order by firstname;
+#UC8 and UC9: modyfying the columns
+alter table addressbook add addressbook_name varchar(50) ;
+select * from addressbook;
+update addressbook set addressbook_name = 'family' where firstname = 'Smith' or firstname = 'user1';
+select * from addressbook;
+update addressbook set addressbook_name = 'friends' where firstname = 'Steve' or firstname = 'mike';
+select addressBook_name, count(*) from addressbook group by addressbook_name;
+update addressbook set addressbook_name = 'friend' where firstname = 'abc';
+select * from addressbook;
+update addressbook set addressbook_name = 'friend' where firstname = 'Another';
+update addressbook set addressbook_name = 'family' where firstname = 'Pritam';
+update addressbook set addressbook_name = 'family' where firstname = 'Sam';
+#UC10: fetching specific data from database
+select addressBook_name, count(*) from addressbook group by addressbook_name;
